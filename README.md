@@ -47,12 +47,14 @@ Unlike chatbots, this system ensures that **only textbook content** is shown, ma
 
 ## ⚙️ Installation
 
+```bash
 python -m venv venv
-venv\Scripts\activate # Windows
+venv\Scripts\activate
+
 pip install -r requirements.txt
+
 python manage.py migrate
 python manage.py runserver
 
-```
 
 ```
