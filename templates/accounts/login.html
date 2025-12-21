@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<div class="login-wrapper">
+    <div class="login-container">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Login to continue</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Email address" required>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        {% for message in messages %}
+            <p class="error-message">{{ message }}</p>
+        {% endfor %}
+
+        <p class="register-text">
+            New user?
+            <a href="{% url 'register' %}">Create an account</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

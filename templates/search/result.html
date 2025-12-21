@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/result.css' %}">
+
+<div class="search-wrapper">
+
+    <!-- Search Form -->
+    <div class="search-card">
+        <h2>Syllabus Topic Search</h2>
+        <p class="subtitle">
+            Search syllabus topics and get exact textbook definitions
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Enter Topic Name</label>
+                <input
+                    type="text"
+                    name="query"
+                    value="{{ query }}"
+                    placeholder="e.g. Abstraction, Inheritance"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Select Textbook PDF</label>
+                <select name="pdf" required>
+                    {% for p in pdfs %}
+                        <option value="{{ p.id }}"
+                            {% if selected_pdf == p.id %}selected{% endif %}
+                        >
+                            {{ p.title }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+    </div>
+
+    <!-- Results Section -->
+    {% if result %}
+        <div class="results">
+
+            <!-- Confidence -->
+            <div class="confidence-card">
+                <strong>Confidence:</strong> {{ result.confidence }}%
+                <p>{{ result.reason }}</p>
+            </div>
+
+            <!-- Definition -->
+            <div class="definition-card">
+                <h3>Exact Textbook Definition</h3>
+                <span class="page">Page {{ result.definition.page_number }}</span>
+                <p>{{ result.definition.content }}</p>
+            </div>
+
+            <!-- Explanations -->
+            {% if result.explanations %}
+                <h4 class="section-title">Related Explanations</h4>
+                {% for text in result.explanations %}
+                    <div class="explanation-card">
+                        <span class="page">Page {{ text.page_number }}</span>
+                        <p>{{ text.content }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <!-- Diagrams -->
+            <!-- Diagrams -->
+            {% if result.diagrams %}
+            <h4 class="section-title">Related Diagrams</h4>
+
+            <div class="diagram-grid">
+                {% for d in result.diagrams %}
+                <div class="diagram-card">
+                    <img
+                        src="{{ d.image.url }}"
+                        alt="Related diagram"
+                        class="zoomable"
+                        onclick="openModal(this.src)"
+                    >
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+
+        </div>
+
+    {% elif query %}
+        <div class="no-result">
+            <strong>No relevant syllabus definition found.</strong>
+            <p>Try refining the topic name.</p>
+        </div>
+    {% endif %}
+
+</div>
+
+<!-- Image Modal -->
+<!-- Image Modal -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+
+<script>
+function openModal(src) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+
+    modal.style.display = "flex";
+    modalImg.src = src;
+}
+
+function closeModal() {
+    document.getElementById("imageModal").style.display = "none";
+}
+
+// Close on ESC key
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+});
+</script>
+
+
+{% endblock %}

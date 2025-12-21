@@ -1,0 +1,129 @@
+/* =====================
+   REGISTER PAGE (MONOCHROME)
+   Matches login.css exactly
+===================== */
+
+/* Consistent box sizing */
+.auth-wrapper,
+.auth-wrapper * {
+    box-sizing: border-box;
+}
+
+/* Wrapper */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card */
+.auth-wrapper .auth-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 36px 32px;
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 14px;
+    text-align: center;
+}
+
+/* Heading */
+.auth-wrapper h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+/* Subtitle */
+.auth-wrapper .subtitle {
+    font-size: 14px;
+    opacity: 0.65;
+    margin-bottom: 28px;
+}
+
+/* Form layout */
+.auth-wrapper form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Input group */
+.auth-wrapper .input-group {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* Inputs */
+.auth-wrapper input {
+    width: 100%;
+    height: 44px;
+    padding: 0 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 2px solid #000000;
+    background: #ffffff;
+    color: #000000;
+    line-height: 1;
+}
+
+.auth-wrapper input::placeholder {
+    line-height: 44px;
+    opacity: 0.45;
+}
+
+.auth-wrapper input:focus {
+    outline: none;
+}
+
+/* Button */
+.auth-wrapper .auth-btn {
+    width: 100%;
+    height: 44px;
+    margin-top: 10px;
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.auth-wrapper .auth-btn:hover {
+    opacity: 0.85;
+}
+
+/* Error message */
+.auth-wrapper .error-message {
+    margin-top: 14px;
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #000000;
+}
+
+/* Switch text */
+.auth-wrapper .switch-text {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.auth-wrapper .switch-text a {
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .auth-wrapper .auth-container {
+        padding: 28px 22px;
+        margin: 0 16px;
+    }
+
+    .auth-wrapper h2 {
+        font-size: 22px;
+    }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Syllabus Smart Search</title>
+
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Base monochrome styles -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <!-- Page-specific CSS (login, register, upload, etc.) -->
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo-group">
+    <img src="{% static 'images/logo.png' %}" alt="Syllabus Smart Search Logo" class="logo-img">
+    <h1 class="logo-text">Syllabus Smart Search</h1>
+</div>
+
+
+        <nav class="nav">
+            {% if user.is_authenticated %}
+                <span class="welcome">Hi, {{ user.email }}</span>
+                <a href="/pdf/upload/">Upload PDF</a>
+                <a href="/pdf/list/">My PDFs</a>
+                <a href="/search/">Search</a>
+                <a href="/accounts/logout/" class="logout">Logout</a>
+            {% else %}
+                <a href="/accounts/login/">Login</a>
+                <a href="/accounts/register/" class="primary">Register</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
+
+<main class="main-content">
+    {% block content %}{% endblock %}
+</main>
+
+</body>
+</html>

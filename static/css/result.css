@@ -1,0 +1,268 @@
+/* =====================
+   SEARCH & RESULT PAGE (MONOCHROME)
+===================== */
+
+/* Box sizing */
+.search-wrapper,
+.search-wrapper * {
+    box-sizing: border-box;
+}
+
+/* Wrapper */
+.search-wrapper {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #000000;
+}
+
+/* =====================
+   SEARCH CARD
+===================== */
+.search-card {
+    max-width: 520px;
+    margin: 0 auto 40px auto;
+    padding: 44px 40px;
+    border: 2px solid #000000;
+    border-radius: 16px;
+    background: #ffffff;
+    text-align: center;
+}
+
+.search-card h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.search-card .subtitle {
+    font-size: 15px;
+    opacity: 0.65;
+    margin-bottom: 32px;
+}
+
+/* Form */
+.search-card form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Form group */
+.search-card .form-group {
+    text-align: left;
+    margin-bottom: 22px;
+}
+
+.search-card label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* Inputs & select */
+.search-card input,
+.search-card select {
+    width: 100%;
+    height: 46px;
+    padding: 0 16px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    background: #ffffff;
+    color: #000000;
+}
+
+.search-card select {
+    appearance: none;
+}
+
+/* Focus */
+.search-card input:focus,
+.search-card select:focus {
+    outline: none;
+}
+
+/* Button */
+.search-btn {
+    width: 100%;
+    height: 48px;
+    margin-top: 10px;
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    opacity: 0.85;
+}
+
+/* =====================
+   RESULTS SECTION
+===================== */
+.results {
+    margin-top: 40px;
+}
+
+/* Confidence */
+.confidence-card {
+    padding: 24px 26px;
+    border: 2px solid #000000;
+    border-radius: 16px;
+    margin-bottom: 28px;
+}
+
+.confidence-card strong {
+    font-size: 16px;
+}
+
+.confidence-card p {
+    margin-top: 8px;
+    font-size: 14px;
+    opacity: 0.75;
+}
+
+/* Definition */
+.definition-card {
+    padding: 32px 30px;
+    border: 2px solid #000000;
+    border-radius: 16px;
+    margin-bottom: 32px;
+}
+
+.definition-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.definition-card .page {
+    display: block;
+    font-size: 13px;
+    opacity: 0.65;
+    margin-bottom: 14px;
+}
+
+.definition-card p {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* Section title */
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 32px 0 16px;
+}
+
+/* Explanation cards */
+.explanation-card {
+    padding: 22px 24px;
+    border: 2px solid #000000;
+    border-radius: 14px;
+    margin-bottom: 16px;
+}
+
+.explanation-card .page {
+    display: block;
+    font-size: 13px;
+    opacity: 0.65;
+    margin-bottom: 10px;
+}
+
+.explanation-card p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* =====================
+   DIAGRAMS
+===================== */
+.diagram-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.diagram-card {
+    padding: 12px;
+    border: 2px solid #000000;
+    border-radius: 14px;
+    text-align: center;
+    background: #ffffff;
+}
+
+.diagram-card img {
+    width: 100%;
+    height: auto;
+    cursor: zoom-in;
+}
+
+/* =====================
+   NO RESULT
+===================== */
+.no-result {
+    max-width: 520px;
+    margin: 40px auto;
+    padding: 40px 30px;
+    border: 2px dashed #000000;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.no-result p {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* =====================
+   IMAGE MODAL
+===================== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.close {
+    position: absolute;
+    top: 24px;
+    right: 28px;
+    font-size: 32px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+/* =====================
+   MOBILE
+===================== */
+@media (max-width: 600px) {
+    .search-wrapper {
+        margin: 24px auto;
+        padding: 0 16px;
+    }
+
+    .search-card {
+        padding: 32px 24px;
+    }
+
+    .search-card h2 {
+        font-size: 24px;
+    }
+}

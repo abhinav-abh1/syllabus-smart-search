@@ -1,0 +1,187 @@
+/* =========================
+   GLOBAL RESET (SAFE)
+========================= */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
+body .header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #000000;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+body .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* =========================
+   LOGO (IMAGE + TEXT)
+========================= */
+body .logo-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+}
+
+body .logo-img {
+    width: 100px;
+    height: auto;
+    display: block;
+}
+
+body .logo-text {
+    font-size: 22px;
+    font-weight: 800;
+    color: #000000;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+body .nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+body .nav a {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    position: relative;
+    padding: 4px 2px;
+}
+
+/* underline hover */
+body .nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background-color: #000000;
+    transition: width 0.25s ease;
+}
+
+body .nav a:hover::after {
+    width: 100%;
+}
+
+/* =========================
+   PRIMARY (REGISTER)
+========================= */
+body .nav a.primary {
+    padding: 8px 16px;
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 8px;
+}
+
+body .nav a.primary::after {
+    display: none;
+}
+
+body .nav a.primary:hover {
+    opacity: 0.85;
+}
+
+/* =========================
+   LOGOUT
+========================= */
+body .nav a.logout {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+body .nav a.logout:hover {
+    opacity: 0.7;
+}
+
+/* =========================
+   WELCOME TEXT
+========================= */
+body .welcome {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.7;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+body .main-content {
+    max-width: 1200px;
+    margin: 32px auto;
+    padding: 0 20px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    body .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    body .logo-img {
+        width: 36px;
+    }
+
+    body .logo-text {
+        font-size: 20px;
+    }
+
+    body .nav {
+        width: 100%;
+        gap: 12px;
+    }
+
+    body .nav a {
+        font-size: 13px;
+    }
+
+    body .nav a.primary {
+        padding: 7px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    body .main-content {
+        margin: 24px auto;
+        padding: 0 16px;
+    }
+
+    body .logo-img {
+        width: 32px;
+    }
+
+    body .logo-text {
+        font-size: 18px;
+    }
+}

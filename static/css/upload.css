@@ -1,0 +1,144 @@
+/* =====================
+   UPLOAD PAGE (MONOCHROME)
+   ENHANCED CARD SIZE
+===================== */
+
+/* Box sizing consistency */
+.upload-wrapper,
+.upload-wrapper * {
+    box-sizing: border-box;
+}
+
+/* Wrapper */
+.upload-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* =====================
+   CARD (IMPROVED SIZE)
+===================== */
+.upload-wrapper .upload-card {
+    width: 100%;
+    max-width: 520px;              /* ⬅ wider card */
+    padding: 44px 40px;            /* ⬅ more breathing space */
+    background: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 16px;           /* ⬅ slightly smoother */
+    text-align: center;
+}
+
+/* Heading */
+.upload-wrapper h2 {
+    font-size: 28px;               /* ⬅ stronger heading */
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+/* Subtitle */
+.upload-wrapper .subtitle {
+    font-size: 15px;
+    opacity: 0.65;
+    margin-bottom: 34px;           /* ⬅ more separation */
+}
+
+/* =====================
+   FORM
+===================== */
+.upload-wrapper form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Form group */
+.upload-wrapper .form-group {
+    width: 100%;
+    margin-bottom: 22px;           /* ⬅ better spacing */
+    text-align: left;
+}
+
+/* Label */
+.upload-wrapper label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* Inputs */
+.upload-wrapper input[type="text"],
+.upload-wrapper input[type="file"] {
+    width: 100%;
+    height: 46px;                  /* ⬅ slightly taller */
+    padding: 0 16px;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 2px solid #000000;
+    background: #ffffff;
+    color: #000000;
+}
+
+/* File input */
+.upload-wrapper input[type="file"] {
+    height: auto;
+    padding: 10px 12px;
+}
+
+/* Focus */
+.upload-wrapper input:focus {
+    outline: none;
+}
+
+/* =====================
+   BUTTON
+===================== */
+.upload-wrapper .upload-btn {
+    width: 100%;
+    height: 48px;                  /* ⬅ matches card scale */
+    margin-top: 12px;
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.upload-wrapper .upload-btn:hover {
+    opacity: 0.85;
+}
+
+/* =====================
+   MESSAGES
+===================== */
+.upload-wrapper .messages {
+    margin-top: 20px;
+}
+
+.upload-wrapper .message {
+    padding: 12px;
+    font-size: 14px;
+    border: 2px solid #000000;
+    margin-bottom: 10px;
+}
+
+/* =====================
+   MOBILE
+===================== */
+@media (max-width: 600px) {
+    .upload-wrapper .upload-card {
+        max-width: 100%;
+        padding: 32px 24px;
+        margin: 0 16px;
+    }
+
+    .upload-wrapper h2 {
+        font-size: 24px;
+    }
+}

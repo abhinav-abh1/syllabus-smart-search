@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/pdf-list.css' %}">
+
+<div class="pdf-list-wrapper">
+    <div class="pdf-list-header">
+        <h2>Uploaded PDFs</h2>
+        <a href="{% url 'upload_pdf' %}" class="upload-link">
+            + Upload New PDF
+        </a>
+    </div>
+
+    {% if pdfs %}
+        <div class="pdf-grid">
+            {% for pdf in pdfs %}
+                <div class="pdf-card">
+    <div class="pdf-info">
+        <h3>{{ pdf.title }}</h3>
+        <span class="date">
+            Uploaded on {{ pdf.uploaded_at|date:"d M Y, h:i A" }}
+        </span>
+    </div>
+
+    <form method="post" action="{% url 'delete_pdf' pdf.id %}">
+        {% csrf_token %}
+        <button type="submit" class="delete-btn">
+            Delete
+        </button>
+    </form>
+</div>
+
+
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>No PDFs uploaded yet.</p>
+            
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

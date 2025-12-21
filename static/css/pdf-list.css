@@ -1,0 +1,139 @@
+/* =====================
+   PDF LIST PAGE (MONOCHROME)
+   Matches Upload / Login / Register
+===================== */
+
+/* Box sizing */
+.pdf-list-wrapper,
+.pdf-list-wrapper * {
+    box-sizing: border-box;
+}
+
+/* Wrapper */
+.pdf-list-wrapper {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #000000;
+}
+
+/* =====================
+   HEADER
+===================== */
+.pdf-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.pdf-list-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* Upload link */
+.upload-link {
+    padding: 10px 18px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000000;
+}
+
+.upload-link:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+/* =====================
+   GRID
+===================== */
+.pdf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+/* =====================
+   CARD
+===================== */
+.pdf-card {
+    padding: 28px 26px;
+    border: 2px solid #000000;
+    border-radius: 16px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Info */
+.pdf-info h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.pdf-info .date {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* =====================
+   DELETE BUTTON
+===================== */
+.delete-btn {
+    margin-top: 18px;
+    padding: 10px 0;
+    width: 100%;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    background: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+/* =====================
+   EMPTY STATE
+===================== */
+.empty-state {
+    padding: 60px 20px;
+    text-align: center;
+    border: 2px dashed #000000;
+    border-radius: 16px;
+}
+
+.empty-state p {
+    font-size: 16px;
+    opacity: 0.7;
+}
+
+/* =====================
+   MOBILE
+===================== */
+@media (max-width: 600px) {
+    .pdf-list-wrapper {
+        margin: 24px auto;
+        padding: 0 16px;
+    }
+
+    .pdf-list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .pdf-list-header h2 {
+        font-size: 24px;
+    }
+}
