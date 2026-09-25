@@ -10,39 +10,50 @@
     <div class="search-card">
         <h2>Syllabus Topic Search</h2>
         <p class="subtitle">
-            Search syllabus topics and get exact textbook definitions
+            Search syllabus topics and get exact textbook definitions & diagrams
         </p>
 
         <form method="post">
             {% csrf_token %}
 
             <div class="form-group">
-                <label>Enter Topic Name</label>
+                <label for="query">Enter Topic Name</label>
                 <input
                     type="text"
+                    id="query"
                     name="query"
                     value="{{ query }}"
-                    placeholder="e.g. Abstraction, Inheritance"
+                    placeholder="e.g. Abstraction, Inheritance, Polymorphism"
                     required
+                    autocomplete="off"
                 >
             </div>
 
             <div class="form-group">
-                <label>Select Textbook PDF</label>
-                <select name="pdf" required>
+                <label for="pdf">Select Textbook PDF</label>
+                <select id="pdf" name="pdf" required>
+                    <option value="" disabled {% if not selected_pdf %}selected{% endif %}>
+                        -- Choose a textbook --
+                    </option>
                     {% for p in pdfs %}
                         <option value="{{ p.id }}"
-                            {% if selected_pdf == p.id %}selected{% endif %}
-                        >
+                            {% if selected_pdf == p.id %}selected{% endif %}>
                             {{ p.title }}
                         </option>
                     {% endfor %}
                 </select>
             </div>
 
-            <button type="submit" class="search-btn">Search</button>
+            <button type="submit" class="search-btn">Search Textbook</button>
         </form>
     </div>
+
+    <!-- Error Message -->
+    {% if error_message %}
+        <div class="alert alert-warning">
+            <strong>⚠ Notice:</strong> {{ error_message }}
+        </div>
+    {% endif %}
 
     <!-- Results Section -->
     {% if result %}
@@ -50,72 +61,91 @@
 
             <!-- Confidence -->
             <div class="confidence-card">
-                <strong>Confidence:</strong> {{ result.confidence }}%
-                <p>{{ result.reason }}</p>
+                <div class="confidence-header">
+                    <strong>Match Confidence:</strong>
+                    <span class="confidence-score">{{ result.confidence }}%</span>
+                </div>
+                <p class="confidence-reason">{{ result.reason }}</p>
             </div>
 
-            <!-- Definition -->
+            <!-- Exact Definition -->
             <div class="definition-card">
-                <h3>Exact Textbook Definition</h3>
-                <span class="page">Page {{ result.definition.page_number }}</span>
-                <p>{{ result.definition.content }}</p>
+                <div class="card-header">
+                    <h3>Exact Textbook Definition</h3>
+                    <span class="page-badge">Page {{ result.definition.page_number }}</span>
+                </div>
+                <p class="definition-text">{{ result.definition.content }}</p>
             </div>
 
-            <!-- Explanations -->
+            <!-- Related Explanations -->
             {% if result.explanations %}
-                <h4 class="section-title">Related Explanations</h4>
+                <h4 class="section-title">Related Textbook Content</h4>
                 {% for text in result.explanations %}
                     <div class="explanation-card">
-                        <span class="page">Page {{ text.page_number }}</span>
+                        <span class="page-badge">Page {{ text.page_number }}</span>
                         <p>{{ text.content }}</p>
                     </div>
                 {% endfor %}
             {% endif %}
 
-            <!-- Diagrams -->
-            <!-- Diagrams -->
+            <!-- Related Diagrams -->
             {% if result.diagrams %}
-            <h4 class="section-title">Related Diagrams</h4>
-
-            <div class="diagram-grid">
-                {% for d in result.diagrams %}
-                <div class="diagram-card">
-                    <img
-                        src="{{ d.image.url }}"
-                        alt="Related diagram"
-                        class="zoomable"
-                        onclick="openModal(this.src)"
-                    >
+                <h4 class="section-title">Related Diagrams</h4>
+                <div class="diagram-grid">
+                    {% for d in result.diagrams %}
+                        <div class="diagram-card">
+                            <img
+                                src="{{ d.image.url }}"
+                                alt="Diagram from page {{ d.page_number }}"
+                                class="zoomable"
+                                onclick="openModal(this.src)"
+                                loading="lazy"
+                            >
+                            <span class="diagram-page">Page {{ d.page_number }}</span>
+                        </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
             {% endif %}
 
+            <!-- Download Buttons -->
+            <div class="download-form">
+                <form method="get" action="{% url 'download_search_pdf' %}">
+                    <input type="hidden" name="topic" value="{{ query }}">
+                    <button type="submit" class="btn-download">
+                        Download Textbook Extract
+                    </button>
+                </form>
+
+                <form method="get" action="{% url 'download_ai_study_pdf' %}">
+                    <input type="hidden" name="topic" value="{{ query }}">
+                    <button type="submit" class="btn-download secondary">
+                        Download AI Study Material
+                    </button>
+                </form>
+            </div>
 
         </div>
 
-    {% elif query %}
+    {% elif query and not error_message %}
+        <!-- Fallback when result is None but no explicit error was set -->
         <div class="no-result">
-            <strong>No relevant syllabus definition found.</strong>
-            <p>Try refining the topic name.</p>
+            <strong>No relevant textbook definition found.</strong>
+            <p>Try a more specific topic name or select a different PDF.</p>
         </div>
     {% endif %}
 
 </div>
 
 <!-- Image Modal -->
-<!-- Image Modal -->
 <div id="imageModal" class="modal" onclick="closeModal()">
     <span class="close">&times;</span>
-    <img class="modal-content" id="modalImage">
+    <img class="modal-content" id="modalImage" alt="Enlarged diagram">
 </div>
-
 
 <script>
 function openModal(src) {
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImage");
-
     modal.style.display = "flex";
     modalImg.src = src;
 }
@@ -124,13 +154,12 @@ function closeModal() {
     document.getElementById("imageModal").style.display = "none";
 }
 
-// Close on ESC key
+// Close modal on ESC key
 document.addEventListener("keydown", function(event) {
     if (event.key === "Escape") {
         closeModal();
     }
 });
 </script>
-
 
 {% endblock %}

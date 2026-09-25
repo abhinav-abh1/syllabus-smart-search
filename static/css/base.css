@@ -141,6 +141,51 @@ body .main-content {
 }
 
 /* =========================
+   DOWNLOAD BUTTON GROUP
+   PERFECT ALIGNMENT
+========================= */
+
+.download-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* 🔑 Horizontal centering */
+    gap: 14px;               /* Equal spacing between buttons */
+    margin-top: 32px;
+}
+
+/* Force same width for both buttons */
+.download-form form {
+    width: 100%;
+    max-width: 320px;        /* 🔑 Controls button width */
+}
+
+/* Button style (monochrome) */
+.btn-download {
+    width: 100%;             /* 🔑 Makes both buttons equal */
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #000000;
+    padding: 12px 0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+}
+
+/* Hover invert */
+.btn-download:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+/* Click feedback */
+.btn-download:active {
+    transform: scale(0.97);
+}
+/* =========================
    RESPONSIVE
 ========================= */
 @media (max-width: 768px) {

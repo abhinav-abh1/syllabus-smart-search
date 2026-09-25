@@ -1,60 +1,156 @@
-# 📘 Syllabus Smart Search
+# Syllabus Smart Search
 
-Syllabus Smart Search is an AI-assisted academic web application that helps students find **exact textbook definitions and diagrams** for syllabus topics from uploaded textbooks.
+**Exact textbook definitions and diagrams for exam preparation — no AI hallucinations.**
 
-Unlike chatbots, this system ensures that **only textbook content** is shown, making it ideal for exams and academic validation.
-
----
-
-## 🚀 Features
-
-- 🔐 User authentication (Login & Register)
-- 📂 Per-user textbook uploads (privacy protected)
-- 📄 PDF text & diagram extraction
-- 🧠 AI-powered semantic topic matching
-- 📚 Exact textbook definitions (no hallucination)
-- 🖼️ Related diagrams from correct pages
-- 📊 Confidence score for accuracy
-- 🗑️ Delete uploaded PDFs
-- 🎨 Clean, responsive UI
+Syllabus Smart Search is an AI-assisted academic web application that helps students retrieve **precise definitions and related diagrams** directly from their uploaded textbooks. Unlike general chatbots, every result shown to the user comes exclusively from the textbook content, making it ideal for exam preparation and academic validation.
 
 ---
 
-## 🧠 How It Works
+## The Problem
 
-1. User enters a syllabus topic
-2. AI generates a **hidden reference definition**
-3. Reference is converted to a semantic vector
-4. Textbook paragraphs are compared semantically
-5. Closest matching textbook definition is selected
-6. Diagrams from the same page are displayed
-7. Only textbook content is shown to the user
+Students often rely on AI tools to quickly learn syllabus topics before exams. However:
+
+- AI-generated definitions frequently differ from the exact wording used in prescribed textbooks
+- Teachers and examiners evaluate answers based on textbook definitions and diagrams
+- Searching through large PDFs manually the night before an exam is slow, stressful, and inefficient
+
+This mismatch leads to students studying content that does not align with how they will be evaluated.
+
+## The Solution
+
+Syllabus Smart Search bridges this gap by combining semantic search with strict content grounding:
+
+1. Students upload their official textbook PDFs (private to their account)
+2. They search using a syllabus topic name
+3. The system retrieves the closest matching **textbook definition** along with diagrams from the same page
+4. Only original textbook content is displayed — never AI-generated text
+5. Students can download the results as clean, exam-ready PDF notes
+
+The result is short, clean, and exam-relevant material extracted directly from the source.
 
 ---
 
-## 🛠️ Tech Stack
+## Features
 
-| Layer    | Technology            |
-| -------- | --------------------- |
-| Backend  | Django (Python)       |
-| Database | SQLite                |
-| AI       | Gemini API            |
-| ML       | SentenceTransformers  |
-| Frontend | HTML, CSS, JavaScript |
-| Auth     | Django Authentication |
+| Feature                        | Description                                                                 |
+|--------------------------------|-----------------------------------------------------------------------------|
+| User Authentication            | Secure login and registration                                               |
+| Private Textbook Uploads       | Each user’s PDFs are isolated and privacy-protected                         |
+| PDF Processing                 | Automatic text extraction and diagram detection                             |
+| Semantic Topic Matching        | AI-powered matching of syllabus topics to textbook content                  |
+| Exact Definitions              | Results contain only original textbook text (no hallucination)              |
+| Related Diagrams               | Diagrams from the matching page are displayed alongside the text            |
+| Confidence Score               | Transparency into how closely the match aligns with the query               |
+| **Download Textbook Extract**  | Download the exact textbook definition + related content as a clean PDF     |
+| **Download AI Study Material** | Download an AI-enhanced study note generated from the textbook content      |
+| PDF Management                 | Easy deletion of uploaded textbooks                                         |
+| Clean UI                       | Responsive, focused interface designed for quick study sessions             |
 
 ---
 
-## ⚙️ Installation
+## Download Options
 
-```bash
-python -m venv venv
-venv\Scripts\activate
+After a successful search, two download buttons appear:
 
-pip install -r requirements.txt
+| Button                          | What it contains                                                              |
+|---------------------------------|-------------------------------------------------------------------------------|
+| **Download Textbook Extract**   | Exact textbook definition, related explanations, page numbers, and diagrams   |
+| **Download AI Study Material**  | Clean study note generated by AI using the retrieved textbook content as source |
 
-python manage.py migrate
-python manage.py runserver
+Both files are generated as well-formatted PDFs that students can use for quick revision.
 
+---
+
+## How It Works
 
 ```
+User enters syllabus topic
+        ↓
+Gemini generates a hidden reference definition (not shown to user)
+        ↓
+Reference definition is converted into a semantic vector
+        ↓
+Textbook paragraphs (pre-vectorized on upload) are compared
+        ↓
+Closest matching textbook paragraph is selected
+        ↓
+Diagrams from the same page are retrieved
+        ↓
+Only textbook content + confidence score is shown to the user
+        ↓
+User can download:
+   • Textbook Extract (original content)
+   • AI Study Material (enhanced notes based on textbook content)
+```
+
+**Key design principle:** The AI is used only as a semantic bridge and for optional study-note generation. The core answer shown to the user is always taken from the textbook.
+
+---
+
+## Tech Stack
+
+| Layer       | Technology              |
+|-------------|-------------------------|
+| Backend     | Django (Python)         |
+| Database    | SQLite                  |
+| AI          | Gemini API              |
+| Embeddings  | SentenceTransformers    |
+| Frontend    | HTML, CSS, JavaScript   |
+| Auth        | Django Authentication   |
+| PDF Export  | ReportLab / WeasyPrint  |
+
+---
+
+## Installation
+
+```bash
+# Create and activate virtual environment
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# macOS / Linux
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Apply migrations
+python manage.py migrate
+
+# Start the development server
+python manage.py runserver
+```
+
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
+
+---
+
+## Project Structure
+
+```
+syllabus_smart_search/
+├── accounts/                 # User authentication (login, register, profile)
+├── media/                    # Uploaded textbooks and extracted diagrams
+├── pdf_manager/              # PDF upload, text extraction & diagram handling
+├── search/                   # Semantic search, embeddings & matching logic
+├── static/                   # CSS, JavaScript, images
+├── syllabus_smart_search/    # Django project settings & configuration
+├── templates/                # HTML templates
+├── venv/                     # Python virtual environment
+├── .env                      # Environment variables (API keys, secrets)
+├── .gitignore
+├── db.sqlite3                # SQLite database
+├── manage.py
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## Why This Matters
+
+In academic settings, accuracy of source material is critical. Syllabus Smart Search respects that reality by treating textbooks as the single source of truth while still leveraging modern AI techniques for fast, intelligent retrieval. Students can both **view** and **download** exam-aligned content, making last-minute revision faster and more reliable.
+
+---

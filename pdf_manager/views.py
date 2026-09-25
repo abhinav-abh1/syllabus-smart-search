@@ -7,6 +7,12 @@ from .pdf_utils import extract_pdf_content
 from .embedding_utils import store_text_embeddings
 from django.shortcuts import get_object_or_404
 
+from django.http import HttpResponse
+from .utils.pdf_export import generate_search_result_pdf
+from .models import ExtractedText, ExtractedDiagram
+from search.ai_study_material import generate_study_material
+from .utils.study_pdf_export import generate_study_material_pdf
+
 
 @login_required
 def upload_pdf(request):
@@ -58,3 +64,54 @@ def delete_pdf(request, pdf_id):
         return redirect("pdf_list")
 
     return redirect("pdf_list")
+
+
+def download_search_pdf(request):
+    topic = request.GET.get("topic")
+
+    if not topic:
+        return HttpResponse("Topic missing", status=400)
+
+    explanation = request.session.get("ai_explanation", "")
+    contents = ExtractedText.objects.filter(content__icontains=topic).order_by(
+        "page_number"
+    )[:20]
+
+    pdf_buffer = generate_search_result_pdf(
+        topic=topic,
+        explanation=explanation,
+        contents=contents,
+    )
+
+    response = HttpResponse(pdf_buffer, content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="{topic}.pdf"'
+    return response
+
+
+def download_ai_study_pdf(request):
+    topic = request.GET.get("topic")
+    if not topic:
+        return HttpResponse("Topic missing", status=400)
+
+    # Fetch relevant text
+    contents = ExtractedText.objects.filter(content__icontains=topic).order_by(
+        "page_number"
+    )[:5]
+
+    # Fetch relevant diagrams (same pages)
+    pages = {c.page_number for c in contents}
+    diagrams = ExtractedDiagram.objects.filter(page_number__in=pages)[:3]
+
+    # Generate grounded AI study notes
+    study_text = generate_study_material(topic, contents)
+
+    # Generate PDF WITH images
+    pdf_buffer = generate_study_material_pdf(
+        topic=topic, study_text=study_text, diagrams=diagrams
+    )
+
+    response = HttpResponse(pdf_buffer, content_type="application/pdf")
+    response["Content-Disposition"] = (
+        f'attachment; filename="{topic}_AI_Study_Material.pdf"'
+    )
+    return response
